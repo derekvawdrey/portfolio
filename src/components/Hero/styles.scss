@@ -1,0 +1,60 @@
+.layer {
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 800px;
+    position: fixed;
+    z-index: -1;
+  }
+
+  
+  #hero{
+    height:100vh;
+    width:100vw;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .hero-text{
+    height: 100%;
+    width:100%;
+    padding:2em;
+  }
+
+  .layer {
+    height:100%;
+    width:100%;
+    margin: 0 auto;
+    overflow: hidden;
+    bottom:0px;
+    background-position: bottom center;
+    filter: drop-shadow(6px 6px #071e2c);
+    -webkit-filter: drop-shadow(6px 6px #071e2c);
+  }
+  
+  .layer-bg {
+    background-image: url("./assets/tree-background.png");
+    background-position: center center;
+  }
+  
+  .layer-1 {
+    background-image: url("./assets/layer3.png");
+    background-position:top;
+  }
+  
+  .layer-2 {
+    background-image: url("./assets/layer2.png");
+  }
+  
+  .layer-3 {
+    background-image: url("./assets/layer1.png");
+  }
+
+  .colored-layer{
+    background-color:#f0c576;
+  }
+
+  .layer-overlay{
+    background-image: url("./assets/overlay.png");
+  }
