@@ -2,25 +2,44 @@ import React, { Component } from 'react';
 import "./styles.scss";
 
 class Hero extends Component {
-    componentDidMount() {
-        this.handleParallax = () => {
-            const topDistance = window.pageYOffset;
-            const layers = document.querySelectorAll("[data-type='parallax']");
-            for (let i = 0; i < layers.length; i++) {
-                const layer = layers[i];
-                const depth = parseFloat(layer.getAttribute('data-depth'));
-                const movement = -(topDistance * depth);
-                const translate3d = `translate3d(0, ${movement}px, 0)`;
-                layer.style.transform = translate3d;
-            }
-        };
-
+    constructor(props) {
+        super(props);
+    
+        this.layerData = [];
+        this.handleParallax = this.handleParallax.bind(this);
+      }
+    
+      componentDidMount() {
+        this.cacheLayers();
+        this.handleParallax(); // Initial call to set the initial position
+    
         window.addEventListener('scroll', this.handleParallax);
-    }
-
-    componentWillUnmount() {
+      }
+    
+      componentWillUnmount() {
         window.removeEventListener('scroll', this.handleParallax);
-    }
+      }
+    
+      cacheLayers() {
+        this.layerData = Array.from(document.querySelectorAll("[data-type='parallax']")).map(layer => ({
+          element: layer,
+          depth: parseFloat(layer.getAttribute('data-depth'))
+        }));
+      }
+    
+      handleParallax() {
+        const topDistance = window.pageYOffset;
+    
+        // Use requestAnimationFrame for smoother animations
+        requestAnimationFrame(() => {
+          for (let i = 0; i < this.layerData.length; i++) {
+            const { element, depth } = this.layerData[i];
+            const movement = -(topDistance * depth);
+            const translate3d = `translate3d(0, ${movement}px, 0)`;
+            element.style.transform = translate3d;
+          }
+        });
+      }
 
     render() {
         return (
